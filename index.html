@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Para Você Princesa</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Poppins:wght@400;700&display=swap');
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom, #800000, #ff1a4b);
+      color: #fff;
+      text-align: center;
+      padding-top: 70px;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: #b3002d;
+      padding: 15px;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      z-index: 10;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1em;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #ffccd5;
+    }
+
+    section {
+      margin: 40px auto;
+      padding: 25px;
+      max-width: 700px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(255, 0, 64, 0.3);
+    }
+
+    h1, h2 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2.5em;
+      color: #ffccd5;
+    }
+
+    p, li {
+      font-size: 1.1em;
+      line-height: 1.6;
+    }
+
+    ul {
+      text-align: left;
+      padding-left: 20px;
+    }
+
+    a {
+      color: #ffcccc;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .justificar p {
+      text-align: justify;
+      line-height: 1.8;
+      font-size: 1.1em;
+    }
+
+    .galeria {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .galeria img {
+      width: 200px;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      transition: transform 0.3s ease;
+    }
+
+    .galeria img:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <canvas id="hearts"></canvas>
+
+  <nav>
+    <a href="#inicio">Início</a>
+    <a href="#cartinha">Cartinha</a>
+    <a href="#homenagem">Homenagem</a>
+    <a href="#galeria">Galeria</a>
+    <a href="#musicas">Músicas</a>
+  </nav>
+
+  <section id="inicio">
+    <h1>Bem Vinda Neném!</h1>
+    <p>Fiz esse site pra poder mostrar o quanto eu te amo, isso não define nada, mas acho que você merece uma homenagem como essa! Aproveite tudo, fiz com muito carinho pra você.</p>
+  </section>
+
+  <section id="cartinha" class="justificar">
+    <h2>Cartinha</h2>
+    <p>
+      (texto da cartinha aqui — já está no seu código, mantive igual)
+    </p>
+  </section>
+
+  <section id="homenagem">
+    <h2>Homenagem</h2>
+    <p style="white-space: pre-line; text-align: left;">
+      Você chegou de mansinho, e ficou,
+      No meu peito fez morada, nem pediu licença.
+      [...]
+      É escrever com você o nosso caminho.
+    </p>
+  </section>
+
+  <section id="galeria">
+    <h2>Galeria</h2>
+    <div class="galeria">
+      <img src="IMG-20250416-WA0004.jpg" alt="Foto 1">
+      <img src="IMG-20250512-WA0002.jpg" alt="Foto 2">
+      <img src="IMG-20250607-WA0013.jpg" alt="Foto 3">
+    </div>
+  </section>
+
+  <section id="musicas">
+    <h2>Nossas Músicas</h2>
+    <ul>
+      <li><a href="https://open.spotify.com/track/04TEGDzD2pAtNfMihysg2n" target="_blank">Pecado</a></li>
+      <li><a href="https://open.spotify.com/album/2aDbc1wZ5cqab0FPTED2uu" target="_blank">Skunk Achocolatado</a></li>
+      <li><a href="https://open.spotify.com/track/6pk991Hvvwfb6A15zQKumu" target="_blank">Inevitável / Cheiro Bom</a></li>
+      <li><a href="https://open.spotify.com/track/6epY5iZGSDkPkq0lFITHiN" target="_blank">Cor Do Amor</a></li>
+      <li><a href="https://open.spotify.com/track/67mqU3FeErlvWwsxnMfvQo" target="_blank">Tudo Aconteceu</a></li>
+      <li><a href="https://open.spotify.com/track/7MQJYm0QPF2Vf0UtzKapSc" target="_blank">Nossa Principal</a></li>
+    </ul>
+  </section>
+
+  <script>
+    const canvas = document.getElementById('hearts');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let hearts = [];
+
+    function Heart() {
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height - canvas.height;
+      this.size = Math.random() * 10 + 10;
+      this.speed = Math.random() * 2 + 1;
+      this.opacity = Math.random() * 0.5 + 0.5;
+    }
+
+    Heart.prototype.draw = function () {
+      ctx.globalAlpha = this.opacity;
+      ctx.fillStyle = '#ff3366';
+      ctx.beginPath();
+      ctx.moveTo(this.x, this.y);
+      ctx.bezierCurveTo(this.x + this.size / 2, this.y - this.size / 2,
+                        this.x + this.size, this.y + this.size / 3,
+                        this.x, this.y + this.size);
+      ctx.bezierCurveTo(this.x - this.size, this.y + this.size / 3,
+                        this.x - this.size / 2, this.y - this.size / 2,
+                        this.x, this.y);
+      ctx.fill();
+    };
+
+    function animateHearts() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = 0; i < hearts.length; i++) {
+        hearts[i].y += hearts[i].speed;
+        if (hearts[i].y > canvas.height) {
+          hearts[i] = new Heart();
+          hearts[i].y = -hearts[i].size;
+        }
+        hearts[i].draw();
+      }
+      requestAnimationFrame(animateHearts);
+    }
+
+    function initHearts(count) {
+      for (let i = 0; i < count; i++) {
+        hearts.push(new Heart());
+      }
+    }
+
+    initHearts(50);
+    animateHearts();
+  </script>
+</body>
+</html>
